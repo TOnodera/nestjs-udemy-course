@@ -7,13 +7,13 @@ import { CreateItemDto } from './dto/create-item.dto';
 export class ItemsController {
     constructor(private readonly itemsService: ItemsService) { }
     @Get()
-    findAll(): Item[] {
-        return this.itemsService.findAll();
+    async findAll(): Promise<Item[]> {
+        return await this.itemsService.findAll();
     }
 
     @Get(':id')
-    findById(@Param('id', ParseUUIDPipe) id: string): Item {
-        return this.itemsService.findById(id);
+    async findById(@Param('id', ParseUUIDPipe) id: string): Promise<Item> {
+        return await this.itemsService.findById(id);
     }
 
     @Post()
@@ -22,13 +22,13 @@ export class ItemsController {
     }
 
     @Patch(':id')
-    updateStatus(@Param('id', ParseUUIDPipe) id: string): Item {
-        return this.itemsService.updateStatus(id);
+    async updateStatus(@Param('id', ParseUUIDPipe) id: string): Promise<Item> {
+        return await this.itemsService.updateStatus(id);
     }
 
     @Delete(':id')
-    delete(@Param('id', ParseUUIDPipe) id: string): void {
-        this.itemsService.delete(id);
+    async delete(@Param('id', ParseUUIDPipe) id: string): Promise<void> {
+        await this.itemsService.delete(id);
     }
 
 }
